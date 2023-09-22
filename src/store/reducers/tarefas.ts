@@ -2,44 +2,54 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Tarefa from '../../models/Tarefa'
 import * as enums from '../../uteis/enums/Tarefas'
 
-const TarefasSlice = createSlice({
+type TarefaState = {
+  itens: Tarefa[]
+}
+
+const initialState: TarefaState = {
+  itens: [
+    {
+      titulo: 'Estudar JavaScript',
+      prioridade: enums.Prioridade.ALTA,
+      status: enums.Status.PENDENTE,
+      descricao: 'Fortalecer conceitos gerais',
+      id: 1
+    },
+    {
+      titulo: 'Praticar conhecimentos com uma landing page',
+      prioridade: enums.Prioridade.BAIXA,
+      status: enums.Status.CONCLUIDO,
+      descricao: 'Fortalecer conhecimentos adquiridos',
+      id: 2
+    },
+    {
+      titulo: 'Estudar BS',
+      prioridade: enums.Prioridade.BAIXA,
+      status: enums.Status.PENDENTE,
+      descricao: 'Fortalecer conceitos gerais',
+      id: 3
+    }
+  ]
+}
+
+const tarefasSlice = createSlice({
   name: 'tarefas',
-  initialState: [
-    new Tarefa(
-      'Estudar JavaScript',
-      enums.Prioridade.ALTA,
-      enums.Status.PENDENTE,
-      'Fortalecer conceitos gerais',
-      1
-    ),
-    new Tarefa(
-      'Estudar Django',
-      enums.Prioridade.ALTA,
-      enums.Status.PENDENTE,
-      '',
-      2
-    ),
-    new Tarefa(
-      'Estudar HTML e CSS',
-      enums.Prioridade.ALTA,
-      enums.Status.CONCLUIDO,
-      '',
-      3
-    ),
-    new Tarefa(
-      'Revisar CV',
-      enums.Prioridade.BAIXA,
-      enums.Status.PENDENTE,
-      'Talvez seria melhor dar uma olhada nas informações gerais',
-      4
-    )
-  ],
+  initialState,
   reducers: {
     remover: (state, action: PayloadAction<number>) => {
-      state = state.filter((tarefa) => tarefa.id != action.payload)
+      state.itens = state.itens.filter((tarefa) => tarefa.id != action.payload)
+    },
+    editar: (state, action: PayloadAction<Tarefa>) => {
+      const indexDaTarefa = state.itens.findIndex(
+        (t) => t.id === action.payload.id
+      )
+
+      if (indexDaTarefa >= 0) {
+        state.itens[indexDaTarefa] = action.payload
+      }
     }
   }
 })
 
-export const { remover } = TarefasSlice.actions
-export default TarefasSlice.reducer
+export const { remover, editar } = tarefasSlice.actions
+export default tarefasSlice.reducer
