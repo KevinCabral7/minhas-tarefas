@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import Tarefa from '../../components/Tarefa'
-import { Container } from './styles'
+import { MainContainer } from '../../styles'
 import { RootReducer } from '../../store'
 
 const ListaDeTarefas = () => {
@@ -30,7 +30,7 @@ const ListaDeTarefas = () => {
     }
   }
   return (
-    <Container>
+    <MainContainer>
       <p>
         2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{termo}&ldquo;
       </p>
@@ -47,7 +47,7 @@ const ListaDeTarefas = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   )
 }
 
