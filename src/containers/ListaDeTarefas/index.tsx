@@ -30,9 +30,6 @@ const ListaDeTarefas = () => {
   }
   return (
     <MainContainer>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{termo}&ldquo;
-      </p>
       <ul>
         {filtraTarefas().map((t) => (
           <li key={t.titulo}>
