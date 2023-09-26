@@ -36,6 +36,7 @@ const FiltroCard = ({ legenda, criterio, valor }: Props) => {
   }
 
   const ativo = verificaAtivo()
+
   const contador = contarTarefas()
   return (
     <S.Card ativo={ativo} onClick={filtrar}>
